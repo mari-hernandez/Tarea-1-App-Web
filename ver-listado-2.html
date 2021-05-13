@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" >
+	<title>Listado</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			color: #793568;
+
+			background:url(Fondo.jpg);
+			background-size: cover;
+			background-repeat: repeat;
+			background-attachment: fixed
+        }
+        #main {
+        	background-color: #ffdbe2e7;
+            width: 55%;
+            margin-left: 22.5%;
+            padding: 25px;
+            margin-top: 4%;
+            margin-bottom: 5%;
+            border-radius: 10px;
+            box-shadow: #00000012 0 0 5px 6px;
+
+        }
+        h2{
+        	text-align: center;
+        }
+
+	</style>
+	<script>
+                function Agrandar(i) {
+                    document.getElementById("imagen"+i).height = 600;
+                    document.getElementById("imagen"+i).width = 800;
+                    document.getElementById("cerrar"+i).style.display = "inline-block";
+                           }
+                function Cerrar(i) {
+                    document.getElementById("imagen"+i).height = 240;
+                    document.getElementById("imagen"+i).width = 320;
+                    document.getElementById("cerrar"+i).style.display = "none";
+                           }
+        </script>
+</head>
+
+ 
+<body>
+    <header>
+    	<a href="Avistamientos.html">
+    		<img src="Titulo-chiquito.png" alt="Logo Avistamientos">
+    	</a>
+	</header>
+<div id="main">
+	<h2> Informacion del Avistamiento</h2>
+
+	<h3>Fecha del avistamiento:</h3> 2021-03-29
+	<h3>Hora del avistamiento :</h3> 13:21
+	<h3>Tipo :</h3> Arácnido
+	<h3>Estado :</h3> Vivo
+	<h3>Comuna :</h3> La Florida 
+	<h3>Sector :</h3> Vicuña Mackena
+	<h3>Nombre del avistante :</h3> María Antonia Hernandez 
+	<h3>Mail del avistante :</h3> maaaari.hernandez@gmail.com
+	<h3>Número celular del avistante :</h3> +569 68324003
+	<h3>Total avistamientos :</h3> 5
+	<h3>Fotos :</h3> 
+	<img alt="Imagen araña" id="imagen1" src="aranita.png" width="320" height="240" onclick = "Agrandar(1)">
+    <button id="cerrar1" style="display: none;" onclick="Cerrar(1)">Cerrar</button>
+    <br>
+
+    <img alt="Imagen araña 2" id="imagen2" src="aranita2.png" width="320" height="240" onclick = "Agrandar(2)">
+    <button id="cerrar2" style="display: none;" onclick="Cerrar(2)">Cerrar</button>
+<br>
+    <button onclick="location.href='ver-listado-avistamientos.html'" >Volver al listado de avistamientos</button>
+              
+
+</div>
+
+
+
+
+
+
+</body>
+</html>

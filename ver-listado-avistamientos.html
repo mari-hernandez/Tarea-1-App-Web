@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" >
+	<title>Listado de avistamientos</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			color: #793568;
+
+			background:url(Fondo.jpg);
+			background-size: cover;
+			background-repeat: repeat;
+			background-attachment: fixed
+        }
+        header{
+        	align-content: flex-start;
+        }
+		.tablita{
+			margin-left: 20%;
+			background-color: #ffdbe2e7;
+			font-family: Arial;
+			cursor: pointer;
+		}
+		table{
+			margin-bottom: 7%;
+		}
+		th, td{
+			border: solid 1px;
+			padding: 10px;
+		}	
+
+		table tr:hover{
+          background-color: #79356888;
+          color:#4b2241;
+        }
+        table th{
+        	background-color: #79356888;
+        	cursor: default;
+
+        }			
+
+	</style>
+</head>
+<body>
+<header>
+    <a href="Avistamientos.html">
+    	<img src="Titulo-chiquito.png" alt="Logo Avistamientos">
+    </a>
+</header>
+
+
+    <table class="tablita">
+		<thead>
+	  		<tr>
+	    		<th>Fecha - hora</th> <th>Comuna</th><th>Sector</th><th>Nombre contacto</th><th>Total avistamientos</th><th>Total fotos</th>
+	  		</tr>
+ 		 </thead>
+
+
+			<tr onclick="location.href='ver-listado-2.html'">
+			    <td>2021-03-29<br>13:21</td><td>La Florida</td><td>Vicuña Mackena</td><td>María Antonia Hernandez</td><td>5</td><td>2</td>
+			</tr>
+
+			<tr onclick="location.href='ver-listado-2.html'">
+			  	<td>2021-03-29<br>12:30</td><td>Providencia</td><td>Plaza Dignidad</td><td>Shoyo Hinata</td><td> 3</td><td>1</td>
+			</tr>
+
+			<tr onclick="location.href='ver-listado-2.html'">
+				<td>2021-03-29<br>7:23</td><td>San Miguel</td><td>Salecianos</td><td>Mikasa Ackerman</td><td>2</td><td>1</td>
+			</tr>
+
+			<tr onclick="location.href='ver-listado-2.html'">
+			  	<td>2021-03-28<br>23:57</td><td>Pudahuel</td><td>Ciudad de los Valles</td><td>Naruto Uzumaki</td><td>3</td><td>1</td>
+			</tr>
+
+			<tr onclick="location.href='ver-listado-2.html'">
+			  	<td>2021-03-29<br>21:26</td><td>La Serena</td><td>Las Compañias</td><td>Joaquin Zepeda</td><td>1</td><td>1</td>
+			</tr>
+	</table>
+
+</body>
+
+</html>

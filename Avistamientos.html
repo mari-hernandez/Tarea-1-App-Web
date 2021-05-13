@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" >
+	<title> Avistamientos</title>
+	<link rel="stylesheet" type="text/css" href="fonts/style.css">
+	<style> 
+		body{
+			margin: 0;
+			padding: 0;
+			color: #793568;
+			text-align: center;
+			background:url(Fondo.jpg);
+			background-size: cover;
+			background-repeat: repeat;
+			background-attachment: fixed
+		}
+		.titulo{
+			margin-top: 10%;
+
+		}
+		.container{
+
+			width: 1200px;
+			height: 300px;
+			background: transparent;
+			margin-top: 10%;
+			margin-left: 3%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+		.item{
+			background: #ffdbe2e7;
+			width: 30%;
+			margin-right: 2%;
+			margin-bottom: 10%;
+			overflow: hidden;
+
+		}
+		.item a{
+			text-decoration: none;
+			color:#793568;
+			
+		}
+
+		.container a:hover, .item:hover  {
+          background-color: #79356888;
+          color:#4b2241;
+        }
+
+		.tablita{
+			margin-left: 20%;
+			background-color: #ffdbe2e7;
+			font-family: Arial;
+		}
+
+		table{
+			margin-bottom: 7%;
+		}
+		th, td{
+			border: solid 1px;
+			padding: 10px;
+		}
+
+		h3 span{
+			font-size: 100px;
+		}
+
+		footer{
+			color: #793568;
+			text-align: right;
+		}
+
+		p{
+			background: #ffdbe2e7
+		}
+
+	</style>
+</head>
+
+
+<body>
+	<div class="titulo">
+		<h1> Bienvenidos a</h1>
+	</div>
+	<div class="imagentitulo">
+		<img src="Titulo.png" alt="Logo Avistamientos">
+	</div>
+	<h2>¿Que nos motiva?</h2>
+	<p>Entre los variados efectos del cambio climático, se encuentran las consecuencias sobre
+grandes familias del reino animal, entre ellas los insectos, arácnidos y miriápodos. Esto ha
+generado avistamiento de seres vivos en lugares en los cuales no solían habitar y es muy
+importante mantener un registro de estos avistamientos.</p>
+<p> Es por esto que creamos Avistamientos, una pagina donde la comunidad podrá informar y ser informada
+sobre la aparicion de insectos, arácnidos y miriápodos que los rodean!</p>
+
+
+<div class="container">
+	<div class="item">
+	<a href="informar-avistamiento.html">
+	
+		<h3>
+		<span class="icon-eye"></span><br><br>
+		Informar avistamiento
+		</h3></a>
+	</div>
+	<div class="item">
+	<a href="ver-listado-avistamientos.html">
+	
+		<h3>
+		<span class="icon-list-numbered"></span><br><br>
+		 Ver listado de avistamientos 
+		</h3></a>
+	</div>
+	<div class="item">
+	<a href="estadisticas.html">
+	
+		<h3> 
+		<span class="icon-stats-bars"></span><br>
+		<br>
+		Estadisticas 
+		</h3></a>
+	</div>
+</div>
+
+
+<h2>Ultimos avistamientos informados</h2>
+
+
+<table class="tablita">
+	<thead>
+	  <tr>
+	    <td>Fecha - hora</td> <td>Comuna</td><td>Sector</td><td>Tipo</td><td>Foto</td>
+	  </tr>
+  	</thead>
+
+	  <tr>
+	    <td>2021-03-29<br>13:21</td><td>La Florida</td><td>Vicuña Mackena</td><td>Insecto</td><td><img src="chinita.png" alt="Foto chinita"></td>
+	  </tr>
+
+	  <tr>
+	    <td>2021-03-29<br>12:30</td><td>Providencia</td><td>Plaza Dignidad</td><td>Aracnido</td><td><img src="aranita.png" alt="Foto Araña"></td>
+	  </tr>
+
+	  <tr>
+	  	<td>2021-03-29<br>7:23</td><td>San Miguel</td><td>Salecianos</td><td>Aracnido</td><td><img src="aranita2.png" alt="Foto Araña"></td>
+	  </tr>
+
+	  <tr>
+	    <td>2021-03-28<br>23:57</td><td>Pudahuel</td><td>Ciudad de los Valles</td><td>Insecto</td><td><img src="polilla.png" alt="Foto Polilla"></td>
+	  </tr>
+
+	  <tr>
+	    <td>2021-03-29<br>21:26</td><td>La Serena</td><td>Las Compañias</td><td>Insectos</td><td><img src="cuncuna.png" alt="Foto cuncuna"></td>
+	  </tr>
+
+</table>
+
+
+<footer>
+	<p> Hecho por María Antonia Hernández</p>
+</footer>
+</body>
+</html>

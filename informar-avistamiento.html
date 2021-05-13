@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" >
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+	<title> Informar avistamiento</title>
+<style>
+        body {
+			margin: 0;
+			padding: 0;
+			color: #793568;
+
+			background:url(Fondo.jpg);
+			background-size: cover;
+			background-repeat: repeat;
+			background-attachment: fixed
+        }
+
+
+        #main {
+        	background-color: #ffdbe2e7;
+            width: 60%;
+            margin-left: 20%;
+            padding: 25px;
+            margin-top: 4%;
+            margin-bottom: 5%;
+            border-radius: 10px;
+            box-shadow: #00000012 0 0 5px 6px;
+
+        }
+
+        .leyenda {
+            vertical-align: top;
+            font-size: 17px;
+            width: 35%;
+            display: inline;
+            margin-right: 7px;
+        }
+
+        .leyenda2 {
+            font-size: 13px;
+            width: 35%;
+            display: inline;
+            margin-right: 7px;
+        }
+
+        input {
+            
+            padding: 5px;
+            width: 50%;
+        }
+
+        .entrada {
+            margin-bottom: 5px;
+        }    
+
+        header{
+        	align-content: flex-start;
+        	
+
+        }
+        #error{
+        	display: none;
+        	background-color: #d43125d0;
+			color: white;
+            width: 50%;
+            margin-left: 25%;
+            padding: 25px;
+            margin-top: 4%;
+            margin-bottom: 5%;
+        }
+        footer{
+        	margin-left: 28%;
+        }
+        .modal {
+			  display: none; /* Hidden by default */
+			  position: fixed; /* Stay in place */
+			  z-index: 1; /* Sit on top */
+			  padding-top: 100px; /* Location of the box */
+			  left: 0;
+			  top: 0;
+			  width: 100%; /* Full width */
+			  height: 100%; /* Full height */
+			  overflow: auto; /* Enable scroll if needed */
+			  background-color: rgb(0,0,0); /* Fallback color */
+			  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+
+			/* Modal Content */
+		.modal-content {
+			  background-color: #fefefe;
+			  margin: auto;
+			  padding: 20px;
+			  border: 1px solid #888;
+			  width: 80%;
+			}
+</style>
+<script src="validador.js"></script>
+<script >
+	        var RegionesYcomunas = {
+				"regiones": [{
+						"NombreRegion": "Arica y Parinacota",
+						"comunas": ["Arica", "Camarones", "Putre", "General Lagos"]
+				},
+					{
+						"NombreRegion": "Tarapacá",
+						"comunas": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"]
+				},
+					{
+						"NombreRegion": "Antofagasta",
+						"comunas": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "Tocopilla", "María Elena"]
+				},
+					{
+						"NombreRegion": "Atacama",
+						"comunas": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"]
+				},
+					{
+						"NombreRegion": "Coquimbo",
+						"comunas": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"]
+				},
+					{
+						"NombreRegion": "Valparaíso",
+						"comunas": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"]
+				},
+					{
+						"NombreRegion": "Región del Libertador Gral. Bernardo O’Higgins",
+						"comunas": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchihue", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"]
+				},
+					{
+						"NombreRegion": "Región del Maule",
+						"comunas": ["Talca", "ConsVtución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "ReVro", "San Javier", "Villa Alegre", "Yerbas Buenas"]
+				},
+					{
+						"NombreRegion": "Región del Biobío",
+						"comunas": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío", "Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "Chillán Viejo", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"]
+				},
+					{
+						"NombreRegion": "Región de la Araucanía",
+						"comunas": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria", ]
+				},
+					{
+						"NombreRegion": "Región de Los Ríos",
+						"comunas": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"]
+				},
+					{
+						"NombreRegion": "Región de Los Lagos",
+						"comunas": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "FruVllar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"]
+				},
+					{
+						"NombreRegion": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+						"comunas": ["Coihaique", "Lago Verde", "Aisén", "Cisnes", "Guaitecas", "Cochrane", "O’Higgins", "Tortel", "Chile Chico", "Río Ibáñez"]
+				},
+					{
+						"NombreRegion": "Región de Magallanes y de la AntárVca Chilena",
+						"comunas": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos (Ex Navarino)", "AntárVca", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
+				},
+					{
+						"NombreRegion": "Región Metropolitana de Santiago",
+						"comunas": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "TilVl", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"]
+				}]
+			}
+
+			jQuery(document).ready(function () {
+
+					var iRegion = 0;
+					var htmlRegion = '<option value="sin-region">Seleccione región</option><option value="sin-region">--</option>';
+					var htmlComunas = '<option value="sin-region">Seleccione comuna</option><option value="sin-region">--</option>';
+
+					jQuery.each(RegionesYcomunas.regiones, function () {
+						htmlRegion = htmlRegion + '<option value="' + RegionesYcomunas.regiones[iRegion].NombreRegion + '">' + RegionesYcomunas.regiones[iRegion].NombreRegion + '</option>';
+						iRegion++;
+					});
+
+					jQuery('#regiones').html(htmlRegion);
+					jQuery('#comunas').html(htmlComunas);
+
+					jQuery('#regiones').change(function () {
+						var iRegiones = 0;
+						var valorRegion = jQuery(this).val();
+						var htmlComuna = '<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
+						jQuery.each(RegionesYcomunas.regiones, function () {
+							if (RegionesYcomunas.regiones[iRegiones].NombreRegion == valorRegion) {
+								var iComunas = 0;
+								jQuery.each(RegionesYcomunas.regiones[iRegiones].comunas, function () {
+									htmlComuna = htmlComuna + '<option value="' + RegionesYcomunas.regiones[iRegiones].comunas[iComunas] + '">' + RegionesYcomunas.regiones[iRegiones].comunas[iComunas] + '</option>';
+									iComunas++;
+								});
+							}
+							iRegiones++;
+						});
+						jQuery('#comunas').html(htmlComuna);
+					});
+					jQuery('#comunas').change(function () {
+						if (jQuery(this).val() == 'sin-region') {
+							alert('selecciones Región');
+						} else if (jQuery(this).val() == 'sin-comuna') {
+							alert('selecciones Comuna');
+						}
+					});
+					jQuery('#regiones').change(function () {
+						if (jQuery(this).val() == 'sin-region') {
+							alert('selecciones Región');
+						}
+					});
+
+				});
+
+var i=2;
+    function displayShow() {
+        document.getElementById("foto"+i).style.display = "inline-block";
+        i++;
+    }
+                      
+
+</script>
+    
+</head>
+
+<body>
+
+    <header>
+    	<a href="Avistamientos.html">
+    		<img src="Titulo-chiquito.png" alt="Logo Avistamientos">
+    	</a>
+    </header>
+
+
+
+    <h1>Informar avistamiento</h1>
+    <p>Por favor rellene el siguiente formulario para dar aviso de su avistamiento:</p>
+    <div id="error">
+		<div id="erroresusuario"></div>
+	</div>
+
+    <div id="main">
+        
+        <form method="post" action="Info-recibida.html"> 
+        	<div id="Datos-del-lugar">
+                <div class="entrada"><h3>Datos del lugar:</h3></div>
+                <div class="entrada">
+                    <div class="leyenda">Región donde ocurrió el avistamiento:</div>
+                    <select id="regiones" name="region"></select>
+                </div>
+                <div class="entrada">   
+                    <div class="leyenda">Comuna:</div>
+					<select id="comunas" name="comuna"></select>
+				</div>
+				<div class="entrada">  
+					<div class="leyenda">Sector:</div>
+					<input  type="text" size="200" name="sector" placeholder="Ingrese el sector aqui">
+                </div>
+            </div>    
+   
+            <div id="Datos-de-contacto">   
+                <div class="entrada"> <h3>Datos de contacto:</h3></div>
+
+                <div class="entrada">	
+                    <div class="leyenda">Nombre:</div>
+                    <input  type="text" size="100" name="nombre" placeholder="Ingrese su nombre" maxlength="200">
+                </div>
+                <div class="entrada">
+                    <div class="leyenda">Email:</div>
+                    <input  type="Email" size="100" name="email" placeholder="Ingrese su email" maxlength="200">
+                </div>
+                <div class="entrada">
+                    <div class="leyenda">Número de celular:</div>
+                    <input  type="tel" size="15" name="celular" placeholder="Ingrese su numero" maxlength="200">               
+                </div>
+            </div>     
+
+            <div id="Informacion-de-avistamiento">
+            <div id="Entrada1"> 
+				<div class="entrada">  <h3>Información de avistamiento:</h3></div>
+				<div class="entrada">	
+					<div class="leyenda">Día - Hora:</div>
+                    <input  type="text" size="100" name="dia-hora-avistamiento" placeholder="año-mes-dia hora:minuto" maxlength="200" value="año-mes-dia hora:minuto">
+                </div>
+                <div class="entrada">    
+                    <div class="leyenda">Tipo:</div>
+                    <select name="tipo-avistamiento" >
+                        <option value="">Seleccione una opción</option>
+                        <option value="No sé">No sé</option>
+                        <option value="Insecto">Insecto</option>
+                        <option value="Aracnido">Aracnido</option>
+                        <option value="Miriapodo">Miriapodo</option>
+                    </select>
+                </div>
+                <div class="entrada">    
+                    <div class="leyenda">Estado:</div>
+                    <select name="estado-avistamiento" >
+                        <option value="">Seleccione una opción</option>
+                        <option value="No sé">No sé</option>
+                        <option value="Vivo">Vivo</option>
+                        <option value="Muerto">Muerto</option>
+                    </select> 
+                </div>
+                <div id="FotosInsecto1" class="entrada">    
+                    <div  class="leyenda">Foto:</div>
+                    <input type="file" id="foto1" name="foto-avistamiento"  accept="image/x-png,image/gif,image/jpeg" >
+                    <button  type="button" onclick = "crearBotonFoto(1)">Agregar otra foto</button> <em>(Máximo 5 fotos)</em>
+                            
+                        </div>
+                 </div>   
+                </div>
+
+                <script>
+                	let num=[2]; //arreglo con la cantidad de fotos que tiene cada avistamiento
+                	let k=2; //numero del avistamiento
+                	function crearBotonFoto(entrada){
+
+                		if(num[entrada-1]<=5){
+	                		let fotos = document.getElementById("FotosInsecto"+(entrada).toString());
+	                		let fotoDiv = document.createElement("div");
+	                		let nuevaFoto = ' <input type="file" id="foto'+entrada.toString()+'" name="foto-avistamiento" '+
+	                		'accept="image/x-png,image/gif,image/jpeg" >';
+	                		fotoDiv.innerHTML= nuevaFoto;
+
+
+	                		nuevaFoto.name="foto-avistamiento";
+	         
+	                		num[entrada-1]+=1;
+	                		fotos.appendChild(fotoDiv);}
+
+
+                	}
+
+
+                	function crearAvistamiento(){
+                		num.push(2);
+                		let numeroEnLista = k-1;
+              
+                		let infoAvistamientos = document.getElementById("Informacion-de-avistamiento");
+                		let entrada = document.createElement("entrada");
+                		entrada.innerHTML = '<div class="entrada">  <h3>Información de avistamiento '+ k.toString()+': </h3></div>'+
+                		'<div class="entrada">'+	
+						'<div class="leyenda">Día - Hora:</div>'+
+                    	'<input  type="text" size="100" name="dia-hora-avistamiento" placeholder="año-mes-dia hora:minuto" '+
+                    	'maxlength="200" value="año-mes-dia hora:minuto">'+
+                		'</div>'+
+                		'<div class="entrada">'+    
+                	    '<div class="leyenda">Tipo:</div>'+
+                	    '<select name="tipo-avistamiento" >'+
+                	    '<option value="">Seleccione una opción</option>'+
+                	    '<option value="No sé">No sé</option>'+
+                	    '<option value="Insecto">Insecto</option>'+
+                	    '<option value="Aracnido">Aracnido</option>'+
+                	    '<option value="Miriapodo">Miriapodo</option>'+
+                	    '</select>'+
+                		'</div>'+
+                		'<div class="entrada">    '+
+                	    '<div class="leyenda">Estado:</div>'+
+                	    '<select name="estado-avistamiento" >'+
+                	    '<option value="">Seleccione una opción</option>'+
+                	    '<option value="No sé">No sé</option>'+
+                	    '<option value="Vivo">Vivo</option>'+
+                	    '<option value="Muerto">Muerto</option>'+
+                	    '</select> '+
+                		'</div>'+
+                		'<div id="FotosInsecto'+ k.toString()+'" class="entrada">    '+
+                	    '<div  class="leyenda">Foto:</div>'+
+                	    '<input type="file" id="foto1" name="foto-avistamiento"  accept="image/x-png,image/gif,image/jpeg" >'+
+                	    '<button  type="button" onclick = "crearBotonFoto('+ k.toString()+ ')">Agregar otra foto</button> <em>(Máximo 5 fotos)</em>'+
+                	    '</div>'+
+                	 	'</div> '
+
+		                entrada.name = "Entrada"+ k.toString();
+		                k+=1;
+		                infoAvistamientos.appendChild(entrada);
+		            }
+                </script>
+
+                <footer>
+
+                <div class="entrada">    
+                	<button type="button" onclick="crearAvistamiento()">Informar otro avistamiento en este sector</button>
+                	<button id="myBtn" onclick="validador()" type="button">Enviar informacion de avistamiento</button>
+					<div id="myModal" class="modal">
+					    <div class="modal-content">
+						    <p>¿Estas seguro que desea enviar esta información?</p>
+						    <button name="boton-enviar" type="submit" >Sí, estoy tal y absolutamente seguro</button>
+						    <button type="button" onclick="cerrar()">No estoy seguro, quiero volver al formulario</button>
+						    <script>
+								var modal = document.getElementById("myModal");
+								var btn = document.getElementById("myBtn");
+								function cerrar(){
+									modal.style.display = "none";
+								}
+							</script>
+						</div>
+					</div>
+                </div>
+                </footer>
+        </form>               
+    </div>  
+        
+</body>
+
+</html>
